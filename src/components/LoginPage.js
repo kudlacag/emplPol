@@ -23,15 +23,15 @@ function LoginPage() {
             <img src={userPageImage} width="450px" height="auto" alt="userpage"/>
             <h3>Log In</h3>
            
-            <label htmlFor='user' >User</label>
+            <label htmlFor='user'>User</label>
             <br />
-            <input type="text" name="user" value={user} onChange={handleChanangeUser} className="input-field"/>
+            <input type="text" name="user" value={user} onChange={handleChanangeUser} className="input-field" data-testid="user-input"/>
             <br />
 
             <label htmlFor='password' >Password</label>
             <br />
           
-            <input type="password" name="password" value={password} onChange={handleChanangePassword} className="input-field"/>
+            <input type="password" name="password" value={password} onChange={handleChanangePassword} className="input-field" data-testid="password-input"/>
             <br />
           
         

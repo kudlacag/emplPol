@@ -21,6 +21,7 @@ import LoadingBar from "react-redux-loading-bar";
 
 function App({ dispatch, users, questions, loading}) {
 
+
   useEffect(() => {
     M.AutoInit();
   },[]);
@@ -28,8 +29,7 @@ function App({ dispatch, users, questions, loading}) {
   useEffect(() => {
     dispatch(handleInitialData());
   }, []);
-
-
+ console.log(users);
 
   return (
     <div className="App">
@@ -40,13 +40,6 @@ function App({ dispatch, users, questions, loading}) {
         <Route exact path='/new' element={<NewPoll />} />
         <Route exact path='/leaderdashboard' element={<LeaderDashboard />} />
       </Routes>
-      {/* <NewPoll /> */}
-     {/* <DoneQuestions /> */}
-      {/* <LeaderDashboard /> */}
-      {/* <Questions /> */}
-      {/* <UserPage /> */}
-      {/* <NewPoll /> */}
-      {/* <LoginPage /> */}
       <Footer />
     </div>
   );
@@ -57,7 +50,6 @@ const mapStateToProps = ({ users, questions, LoadingBar}) => {
    return { users,
   questions,
   loading,
-  
 
 }
 }

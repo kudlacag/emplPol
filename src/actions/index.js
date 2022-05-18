@@ -8,8 +8,7 @@ import { showLoading, hideLoading } from "react-redux-loading-bar";
 
 
 export  function handleInitialData () {
-
-    // console.log(_getUsers())
+    
     return async (dispatch) => {
     dispatch(showLoading())
         const { ...users } = await _getUsers();

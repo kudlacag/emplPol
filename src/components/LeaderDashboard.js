@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import UserOne from "../images/user1.jpg";
 
 function LeaderDashboard({ users}) {
-  console.log(users)
+
 
   return (
     <div>
@@ -133,6 +133,6 @@ function LeaderDashboard({ users}) {
 }
 
 const mapStateToProps = ({users}) => {
-  return { }
+  return { users}
 }
 export default connect(mapStateToProps)(LeaderDashboard);
