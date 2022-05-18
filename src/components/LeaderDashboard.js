@@ -5,6 +5,16 @@ import UserOne from "../images/user1.jpg";
 function LeaderDashboard({ users}) {
 
 
+// but this one is not working it says map is not a function 
+// because users are at first null or undefined
+  console.log(users.map((user) => {
+    return user.id
+  }))
+
+  // this one works and i get the data after 3 seconds 
+  console.log(users)
+
+
   return (
     <div>
       <table>
