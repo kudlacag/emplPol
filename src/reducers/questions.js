@@ -13,16 +13,16 @@ export default function questions(state= {loading: false}, action) {
         case SAVE_QUESTION:
             return {
                 ...state,
-                [action.id]: {
+            [action.id]:{
                     ...state[action.id],
                  author: action.author,
                  timestamp: Date.now(),  
-                 [action.optionOne]: {
+                  optionOne: {
                     votes: [action.id],
                     text: action.optionOne,
                   }, 
                   optionTwo: {
-                    votes: [action.author],
+                    votes: action.author,
                     text: action.optionTwo
                   }
                 }

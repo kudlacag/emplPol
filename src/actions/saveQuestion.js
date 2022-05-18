@@ -11,7 +11,7 @@ const addQuestion = (question) => {
 
 export const handleAddQuestion = (id, author, optionOneText, optionTwoText) => {
   return async (dispatch) => {
-      const question = await  _saveQuestion({
+    const question = await  _saveQuestion({
           id,
           author,
           optionOneText,

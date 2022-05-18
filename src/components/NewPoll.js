@@ -6,13 +6,13 @@ function NewPoll({ users, dispatch}) {
 
     const [optionOne, setOptionOne] = useState('');
     const [optionTwo, setOptionTwo] = useState('');
-    const [author, setAuthor] = useState('');
+
  
 
    
 
     let id = "vthrdm985a262al8qx3do";
-  
+    let author = 'sarahedo';
 
     const handleFirstOption = (e) => {
       const text = e.target.value;
@@ -22,19 +22,14 @@ function NewPoll({ users, dispatch}) {
       const text = e.target.value;
         setOptionTwo(text)
     };
-    const handleAuthor = (e) => {
-      const text = e.target.value;
-      setAuthor(text)
-  };
 
     const handleOnsubmit = (e) => {
         e.preventDefault();
         // console.log(firstOption, secondOption)
-        dispatch(handleAddQuestion(id, optionOne, optionTwo, author));
+        dispatch(handleAddQuestion(id, author, optionOne, optionTwo));
 
         setOptionOne('');
         setOptionTwo('');
-        setAuthor('');
 
         console.log(optionOne, optionTwo, author)
     }
@@ -48,7 +43,7 @@ function NewPoll({ users, dispatch}) {
         <input type="text" name="foption" value={optionOne} onChange={handleFirstOption} />
         <h6>First Option</h6>
         <input type="text" name="soption" value={optionTwo} onChange={handleSecondOption} />
-        <input type="text" name="soption" value={author} onChange={handleAuthor} />
+
         <button className="btn waves-effect waves-light" type="submit" value="Submit">Submit
          <i className="material-icons right">send</i>
        </button>

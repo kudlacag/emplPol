@@ -2,7 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import UserOne from "../images/user1.jpg";
 
-function LeaderDashboard({ users, loading}) {
+function LeaderDashboard({ users}) {
+  console.log(users)
 
   return (
     <div>
@@ -131,7 +132,7 @@ function LeaderDashboard({ users, loading}) {
   );
 }
 
-const mapStateToProps = ({ users, loading}) => {
-  return { users, loading }
+const mapStateToProps = ({users}) => {
+  return { }
 }
 export default connect(mapStateToProps)(LeaderDashboard);
