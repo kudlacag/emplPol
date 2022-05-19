@@ -13,7 +13,8 @@ function Nav() {
         <ul className="left">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/leaderdashboard">Leaderdashboard</Link></li>
-          <li><Link to="/new">New</Link></li>
+          <li><Link to="/add">New</Link></li>
+          <li><Link to="/questions">Questions</Link></li>
         </ul>
         <ul  className="right">
       <li><Link to="/">

@@ -1,7 +1,10 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
+import { connect } from 'react-redux';
 import userPageImage from '../images/login.jpg';
 
-function LoginPage() {
+function LoginPage({ users,  userIds ,authedUser}) {
+
+
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
 
@@ -15,6 +18,12 @@ function LoginPage() {
         e.preventDefault();
         console.log('user: ', user, 'password: ', password
         )
+
+        if(userIds.includes(user)){
+          console.log('yessss')
+        }else {
+          console.log('nooo')
+        }
     }
   return (
     <div>
@@ -44,4 +53,17 @@ function LoginPage() {
   )
 }
 
-export default LoginPage
+const mapStateToProps = (state) => {
+  const users = state.users
+  const authedUser = state.authedUser;
+ const userIds = Object.keys(users).map((user) => {
+   return user
+ })
+  return { 
+    users,
+    userIds,
+    authedUser,
+  }
+}
+
+export default connect(mapStateToProps)(LoginPage)

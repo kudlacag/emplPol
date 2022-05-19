@@ -1,18 +1,11 @@
+import userEvent from "@testing-library/user-event";
 import React from "react";
 import { connect } from "react-redux";
 import UserOne from "../images/user1.jpg";
 
-function LeaderDashboard({ users}) {
-
-
-// but this one is not working it says map is not a function 
-// because users are at first null or undefined
-  console.log(users.map((user) => {
-    return user.id
-  }))
-
-  // this one works and i get the data after 3 seconds 
-  console.log(users)
+function LeaderDashboard(props) {
+  
+  // console.log(userIds)
 
 
   return (
@@ -142,7 +135,11 @@ function LeaderDashboard({ users}) {
   );
 }
 
-const mapStateToProps = ({users}) => {
-  return { users}
+function mapStateToProps(state) {
+  const users = state.users
+  return {
+    userIds: Object.keys(users),
+    users
+  }
 }
 export default connect(mapStateToProps)(LeaderDashboard);

@@ -20,7 +20,7 @@ export const handleAddQuestion = (id, author, optionOneText, optionTwoText) => {
         
       });
 
-      dispatch(addQuestion(question));
+   dispatch(addQuestion(question));
 
   } 
 }

@@ -1,8 +1,8 @@
-import { GET_QUESTIONS, SAVE_QUESTION, SET_LOADING} from "../types";
+import { GET_QUESTIONS, SAVE_QUESTION } from "../types";
 
 
 
-export default function questions(state= {loading: false}, action) {
+export default function questions(state={}, action) {
     switch(action.type) {
         case GET_QUESTIONS:
             return {
@@ -13,26 +13,9 @@ export default function questions(state= {loading: false}, action) {
         case SAVE_QUESTION:
             return {
                 ...state,
-            [action.id]:{
-                    ...state[action.id],
-                 author: action.author,
-                 timestamp: Date.now(),  
-                  optionOne: {
-                    votes: [action.id],
-                    text: action.optionOne,
-                  }, 
-                  optionTwo: {
-                    votes: action.author,
-                    text: action.optionTwo
-                  }
-                }
+                [action.question.id]: action.question,
             } 
-            
-        case SET_LOADING:
-            return {
-                ...state,
-                loading: true
-            }    
+             
         default:
             return state;    
     }
