@@ -1,6 +1,7 @@
 import { GET_USERS } from "../types";
 
 export default function users(state = {}, action) {
+    
     switch(action.type) {
         case GET_USERS:
             return {
@@ -8,6 +9,8 @@ export default function users(state = {}, action) {
                 ...action.users
             }
         default:
-            return state;    
+            return {
+              ...state
+            }   
     }
 }

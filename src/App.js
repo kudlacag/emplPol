@@ -36,11 +36,11 @@ function App({ dispatch, users, questions, loading}) {
       <Nav />
       <LoadingBar />
       <Routes>
-        <Route exact path='/' element={<LoginPage />} />
+        <Route exact path='/login' element={<LoginPage />} />
         <Route exact path='/add' element={<NewPoll />} />
         <Route exact path='/leaderdashboard' element={<LeaderDashboard />} />
-        <Route exact path='/questions' element={<Questions/>} />
-        <Route exact path='/question/:id' element={<QuestionPreview/>} />
+        <Route exact path='/' element={<Questions/>} />
+        <Route exact path='/:id' element={<QuestionPreview/>} />
       </Routes>
       <Footer />
     </div>

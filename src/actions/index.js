@@ -15,6 +15,7 @@ export  function handleInitialData () {
     dispatch(showLoading())
         const { ...users } = await _getUsers();
         const { ...questions } =  await _getQuestions();
+        
         dispatch(receiveUsers(users));
         dispatch(setAuthedUser(AuthedUser));
         dispatch(receiveQuestions(questions));

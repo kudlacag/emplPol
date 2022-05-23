@@ -1,9 +1,11 @@
-import React,{useEffect, useState} from 'react';
+import React,{useEffect, useState, } from 'react';
+import { useNavigate } from 'react-router-dom'
 import { connect } from 'react-redux';
 import userPageImage from '../images/login.jpg';
 
-function LoginPage({ users,  userIds ,authedUser}) {
+function LoginPage({userIds ,authedUser, userPassword}) {
 
+    const navigate = useNavigate();
 
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
@@ -16,14 +18,13 @@ function LoginPage({ users,  userIds ,authedUser}) {
     }
     const formSubmit = (e) => {
         e.preventDefault();
-        console.log('user: ', user, 'password: ', password
-        )
+        if(userIds.includes(user) && userPassword.includes(password)){
+          navigate('/');
 
-        if(userIds.includes(user)){
-          console.log('yessss')
-        }else {
-          console.log('nooo')
         }
+        // console.log('user: ', user, 'password: ', password
+
+        // )
     }
   return (
     <div>
@@ -58,11 +59,15 @@ const mapStateToProps = (state) => {
   const authedUser = state.authedUser;
  const userIds = Object.keys(users).map((user) => {
    return user
+ });
+ const userPassword = userIds.map((password) => {
+   return users[password].password
  })
   return { 
     users,
     userIds,
     authedUser,
+    userPassword
   }
 }
 

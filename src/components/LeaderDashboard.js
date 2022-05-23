@@ -3,9 +3,9 @@ import React from "react";
 import { connect } from "react-redux";
 import UserOne from "../images/user1.jpg";
 
-function LeaderDashboard(props) {
+function LeaderDashboard({ users, userIds}) {
   
-  // console.log(userIds)
+  // console.log(userPhoto)
 
 
   return (
@@ -20,115 +20,42 @@ function LeaderDashboard(props) {
         </thead>
 
         <tbody>
-          <tr>
-            <td>
-              {" "}
-              <div className="row">
-                {" "}
-                <div className="col s2">
-                  <img
-                    src={UserOne}
-                    alt="username"
-                    style={{
-                      verticalAlign: "middle",
-                      marginTop: "20px",
-                      width: "70px",
-                      height: "auto",
-                      borderRadius: "45%",
-                    }}
-                  />
-                </div>
-                <div className="col s2">
-                <h5>Sarah Edo</h5>
-                  <span>sarahedo</span>
-                </div>
-              </div>
-            </td>
-            <td>4</td>
-          
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>
-              {" "}
-              <div className="row">
-                {" "}
-                <div className="col s2">
-                  <img
-                    src={UserOne}
-                    alt="username"
-                    style={{
-                      verticalAlign: "middle",
-                      marginTop: "20px",
-                      width: "70px",
-                      height: "auto",
-                      borderRadius: "45%",
-                    }}
-                  />
-                </div>
-                <div className="col s2">
-                <h5>Sarah Edo</h5>
-                  <span>sarahedo</span>
-                </div>
-              </div>
-            </td>
-            <td>4</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>
-              {" "}
-              <div className="row">
-                {" "}
-                <div className="col s2">
-                  <img
-                    src={UserOne}
-                    alt="username"
-                    style={{
-                      verticalAlign: "middle",
-                      marginTop: "20px",
-                      width: "70px",
-                      height: "auto",
-                      borderRadius: "45%",
-                    }}
-                  />
-                </div>
-                <div className="col s2">
-                <h5>Sarah Edo</h5>
-                  <span>sarahedo</span>
-                </div>
-              </div>
-            </td>
-            <td>4</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>
-              {" "}
-              <div className="row">
-                {" "}
-                <div className="col s2">
-                  <img
-                    src={UserOne}
-                    alt="username"
-                    style={{
-                      verticalAlign: "middle",
-                      marginTop: "20px",
-                      width: "70px",
-                      height: "auto",
-                      borderRadius: "45%",
-                    }}
-                  />
-                </div>
-                <div className="col s2">
-                  <h5>Sarah Edo</h5>
-                  <span>sarahedo</span>
-                </div>
-              </div>
-            </td>
-            <td>4</td>
-            <td>2</td>
-          </tr>
+
+
+          {
+            userIds.map((user) => {
+              return (
+                <tr key={users[user].id}>
+                <td>
+                  {" "}
+                  <div className="row">
+                    {" "}
+                    <div className="col s2">
+                      <img
+                        src={users[user].avatarURL}
+                        alt="username"
+                        style={{
+                          verticalAlign: "middle",
+                          marginTop: "20px",
+                          width: "70px",
+                          height: "auto",
+                          borderRadius: "45%",
+                        }}
+                      />
+                    </div>
+                    <div className="col s2">
+                    <h5>{users[user].name}</h5>
+                      <span>{users[user].id}</span>
+                    </div>
+                  </div>
+                </td>
+                <td>{Object.keys(users[user].answers).length}</td>
+              
+                <td>{users[user].questions.length}</td>
+              </tr>
+            )})
+          }
+        
         </tbody>
       </table>
     </div>
@@ -136,10 +63,12 @@ function LeaderDashboard(props) {
 }
 
 function mapStateToProps(state) {
-  const users = state.users
+  const users = state.users;
+ const  userIds = Object.keys(users);
+
   return {
-    userIds: Object.keys(users),
-    users
+    users,
+    userIds,
   }
 }
 export default connect(mapStateToProps)(LeaderDashboard);

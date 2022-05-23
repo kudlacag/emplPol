@@ -14,15 +14,14 @@ function Nav() {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/leaderdashboard">Leaderdashboard</Link></li>
           <li><Link to="/add">New</Link></li>
-          <li><Link to="/questions">Questions</Link></li>
         </ul>
         <ul  className="right">
       <li><Link to="/">
         <img src={userAvatar} alt="useravatar" style={{ width: '50px', height:'auto', borderRadius: '50%'}} />
         </Link></li>
-      <li><Link to="/">Ramadan</Link></li>
+      <li><Link to="/login">Login</Link></li>
       <li className="divider"></li>
-      <li><Link to="/">Logout</Link></li>
+      <li><Link to="/logout">Logout</Link></li>
     </ul>
       </div>
       

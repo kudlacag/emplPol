@@ -31,8 +31,8 @@ function NewPoll({ authedUser, dispatch, users, userIds}) {
         setOptionOne('');
         setOptionTwo('');
 
-        console.log(optionOne, optionTwo, author)
-        navigate('/questions')
+        // console.log(optionOne, optionTwo, author)
+        navigate('/')
     }
   return (
     
