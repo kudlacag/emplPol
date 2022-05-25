@@ -7,9 +7,9 @@ import { showLoading, hideLoading } from "react-redux-loading-bar";
 
 
 
-const AuthedUser = 'sarahedo';
+const AuthedUser = 'mtsamis';
 
-export  function handleInitialData () {
+export  const  handleInitialData =  ()=> {
     
     return async (dispatch) => {
     dispatch(showLoading())
@@ -19,6 +19,8 @@ export  function handleInitialData () {
         dispatch(receiveUsers(users));
         dispatch(setAuthedUser(AuthedUser));
         dispatch(receiveQuestions(questions));
+     
+
    dispatch(hideLoading());
     }
 }

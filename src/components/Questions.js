@@ -49,13 +49,13 @@ const navigate = useNavigate();
               {questionIds.map((ques) => {
                  const {id, author, timestamp} =  questions[ques];
                  if((questions[ques].optionTwo.votes.includes(authedUser)) || ( questions[ques].optionOne.votes.includes(authedUser)) ){
-                  return     <li className='col s4' key={id}>
+                  return    ( <li className='col s4' key={id}>
                   <h4>{author}</h4>
                   <p >{formatDate(questions[ques].timestamp)}</p>
 
              <button onClick={() => {navigate(`/${id}`, {state: {questionIds, userIds, users, questions, authedUser}})}} type='button' className='block'>Show</button>
                </li>
-                 }
+              )}
         
               })}
          
