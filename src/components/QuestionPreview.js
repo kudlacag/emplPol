@@ -16,6 +16,7 @@ function QuestionPreview({ dispatch }) {
   const [answer, setAnswer] = useState();
 
    const options = (e) => {
+  
     setAnswer(e.target.value)
   }
 
@@ -34,7 +35,9 @@ function QuestionPreview({ dispatch }) {
 
   const answered = Object.keys(users[authedUser].answers).includes(id);
 
-  dispatch(handleAddanswer(authedUser, id, answer));
+  if(authedUser && id && answer){
+ dispatch(handleAddanswer(authedUser, id, answer));
+}
 
 
   return (
