@@ -1,33 +1,32 @@
 import { SAVE_ANSWER } from "../types";
-import { _saveQuestionAnswer } from '../data/_DATA';
+import { _saveQuestionAnswer } from "../data/_DATA";
 // import authedUser from "../reducers/authedUser";
 
-
-
-const addAnswer =  (answers) => {
-    return {
-        type: SAVE_ANSWER,
-        answers,
-    }
-}
+const addAnswer = (answer) => {
+  console.log("addAnswer: ", answer);
+  return {
+    type: SAVE_ANSWER,
+    answer,
+  };
+};
 
 let loading = true;
 const stop = () => {
-    return loading= false
-}
+  return (loading = false);
+};
 export const handleAddanswer = (authedUser, qid, answer) => {
-   loading= true;
-    return async (dispatch) => {
-    
-        console.log(authedUser, qid, answer)
-      const answers = await  _saveQuestionAnswer({
-          authedUser,
-          qid,
-          answer
-        });
-//   console.log(answers)
-   const answerObj = {authedUser, qid, answer};
-     dispatch(addAnswer(answerObj));
-     stop();
-    } 
-  } 
+  loading = true;
+  return async (dispatch) => {
+    console.log(authedUser, qid, answer);
+    const isResolved = await _saveQuestionAnswer({
+      authedUser,
+      qid,
+      answer,
+    });
+    console.log("isResolved :", isResolved);
+    if (isResolved) {
+      dispatch(addAnswer({ authedUser, qid, answer }));
+      stop();
+    }
+  };
+};

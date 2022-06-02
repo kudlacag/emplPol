@@ -9,7 +9,7 @@ import reducers from './reducers';
 import middleware from './middleware';
 
 
-const store = createStore(reducers, middleware);
+ const store = createStore(reducers, middleware);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
