@@ -6,7 +6,7 @@ const addAnswer = (answer) => {
   console.log("addAnswer: ", answer);
   return {
     type: SAVE_ANSWER,
-    answer,
+    payload: answer,
   };
 };
 

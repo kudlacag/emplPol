@@ -1,24 +1,34 @@
-import { GET_QUESTIONS, SAVE_QUESTION } from "../types";
+import { GET_QUESTIONS, SAVE_QUESTION, SAVE_ANSWER } from "../types";
 
+export default function questions(state = {}, action) {
+  switch (action.type) {
+    case GET_QUESTIONS:
+      return {
+        ...state,
+        ...action.questions,
+      };
 
+    case SAVE_ANSWER:
+      const { qid, authedUser, answer } = action.payload;
+      console.log("in questions :", qid, authedUser, answer);
+      return {
+        ...state,
+        [qid]: {
+          ...state[qid],
+          [answer]: {
+            ...state[qid][answer],
+            votes: state[qid][answer].votes.concat([authedUser]),
+          },
+        },
+      };
 
-export default function questions(state={}, action) {
-    switch(action.type) {
-        case GET_QUESTIONS:
-            return {
-                ...state,
-                ...action.questions,
-            }
+    case SAVE_QUESTION:
+      return {
+        ...state,
+        [action.question.id]: action.question,
+      };
 
-        case SAVE_QUESTION:
-            
-            return {
-                ...state,
-                [action.question.id]: action.question,
-              
-            } 
-             
-        default:
-            return state;    
-    }
+    default:
+      return state;
+  }
 }
