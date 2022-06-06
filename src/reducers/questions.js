@@ -10,7 +10,7 @@ export default function questions(state = {}, action) {
 
     case SAVE_ANSWER:
       const { qid, authedUser, answer } = action.payload;
-      console.log("in questions :", qid, authedUser, answer);
+      // console.log("in questions :", qid, authedUser, answer);
       return {
         ...state,
         [qid]: {

@@ -1,15 +1,15 @@
-import { GET_AUTHED_USER, LOGOUT_AUTHEDUSER } from "../types"
+import { GET_AUTHED_USER, LOGOUT_AUTHEDUSER } from "../types";
 
-export function setAuthedUser(id){
-    return {
-        type: GET_AUTHED_USER,
-        id,
-    }
+export function setAuthedUser(id) {
+  return {
+    type: GET_AUTHED_USER,
+    payload: id,
+  };
 }
 
-export function logoutAuthedUser(id){
-    return {
-        type: LOGOUT_AUTHEDUSER,
-        id,
-    }
+export function logoutAuthedUser() {
+  return {
+    type: LOGOUT_AUTHEDUSER,
+    payload: null,
+  };
 }

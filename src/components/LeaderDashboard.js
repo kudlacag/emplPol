@@ -1,13 +1,7 @@
-import userEvent from "@testing-library/user-event";
 import React from "react";
 import { connect } from "react-redux";
-import UserOne from "../images/user1.jpg";
 
-function LeaderDashboard({ users, userIds}) {
-  
-  // console.log(userPhoto)
-
-
+function LeaderDashboard({ users, userIds }) {
   return (
     <div>
       <table>
@@ -20,12 +14,9 @@ function LeaderDashboard({ users, userIds}) {
         </thead>
 
         <tbody>
-
-
-          {
-            userIds.map((user) => {
-              return (
-                <tr key={users[user].id}>
+          {userIds.map((user) => {
+            return (
+              <tr key={users[user].id}>
                 <td>
                   {" "}
                   <div className="row">
@@ -44,18 +35,17 @@ function LeaderDashboard({ users, userIds}) {
                       />
                     </div>
                     <div className="col s2">
-                    <h5>{users[user].name}</h5>
+                      <h5>{users[user].name}</h5>
                       <span>{users[user].id}</span>
                     </div>
                   </div>
                 </td>
                 <td>{Object.keys(users[user].answers).length}</td>
-              
+
                 <td>{users[user].questions.length}</td>
               </tr>
-            )})
-          }
-        
+            );
+          })}
         </tbody>
       </table>
     </div>
@@ -64,11 +54,16 @@ function LeaderDashboard({ users, userIds}) {
 
 function mapStateToProps(state) {
   const users = state.users;
- const  userIds = Object.keys(users);
+  const userIds = Object.keys(users).sort(
+    (a, b) =>
+      Object.keys(users[b].answers).length -
+      Object.keys(users[a].answers).length
+  );
 
   return {
     users,
     userIds,
-  }
+    // sorted,
+  };
 }
 export default connect(mapStateToProps)(LeaderDashboard);

@@ -17,13 +17,13 @@ const stop = () => {
 export const handleAddanswer = (authedUser, qid, answer) => {
   loading = true;
   return async (dispatch) => {
-    console.log(authedUser, qid, answer);
+    // console.log(authedUser, qid, answer);
     const isResolved = await _saveQuestionAnswer({
       authedUser,
       qid,
       answer,
     });
-    console.log("isResolved :", isResolved);
+    // console.log("isResolved :", isResolved);
     if (isResolved) {
       dispatch(addAnswer({ authedUser, qid, answer }));
       stop();
