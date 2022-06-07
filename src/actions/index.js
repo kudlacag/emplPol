@@ -1,6 +1,6 @@
 import { _getUsers, _getQuestions } from "../data/_DATA";
 import { receiveUsers } from "./UserAction";
-import { setAuthedUser, logoutAuthedUser } from "./authedUser";
+import { setAuthedUser } from "./authedUser";
 import { receiveQuestions } from "./QuestionsActions";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 

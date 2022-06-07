@@ -5,13 +5,15 @@ import { Link } from "react-router-dom";
 import userAvatar from "../images/useravatar.png";
 
 function Nav(props) {
-  const { authedUser, avatar, userName, dispatch } = props;
-  console.log(authedUser);
+  const { authedUser, avatar, userName, dispatch, users } = props;
+  // console.log(authedUser);
 
-  const logout = () => {
+  const logout = (e) => {
+    e.preventDefault();
     dispatch(logoutAuthedUser());
-    console.log("logedout");
+    // console.log("logedout");
   };
+
   return (
     <nav>
       <div className="nav-wrapper green darken-2">
@@ -19,15 +21,19 @@ function Nav(props) {
           Employee Poll
         </Link>
         <ul className="left">
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/leaderdashboard">Leaderdashboard</Link>
-          </li>
-          <li>
-            <Link to="/add">New</Link>
-          </li>
+          {authedUser && (
+            <>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/leaderdashboard">Leaderdashboard</Link>
+              </li>
+              <li>
+                <Link to="/add">New</Link>
+              </li>
+            </>
+          )}
         </ul>
         <ul className="right">
           {authedUser ? (
@@ -72,7 +78,7 @@ function Nav(props) {
                   />
                 </Link>
               </li>
-              <li>username</li>
+              <li>loged out</li>
               <li>
                 <Link to="/login">Login</Link>
               </li>

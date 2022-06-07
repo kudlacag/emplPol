@@ -31,7 +31,7 @@ function Questions({ userIds, authedUser, questionIds, questions, users }) {
                     type="button"
                     className="block"
                     onClick={() => {
-                      navigate(`/${id}`, {
+                      navigate(`questions/${id}`, {
                         state: {
                           questionIds,
                           userIds,
@@ -70,7 +70,7 @@ function Questions({ userIds, authedUser, questionIds, questions, users }) {
 
                   <button
                     onClick={() => {
-                      navigate(`/${id}`, {
+                      navigate(`questions/${id}`, {
                         state: {
                           questionIds,
                           userIds,

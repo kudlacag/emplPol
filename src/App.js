@@ -15,8 +15,10 @@ import LoadingBar from "react-redux-loading-bar";
 import QuestionPreview from "./components/QuestionPreview";
 import Questions from "./components/Questions";
 import Logout from "./components/Logout";
+import ProtedtedRoutes from "./protectedRoute/ProtedtedRoutes";
+import BadRequest from "./components/BadRequest";
 
-function App({ dispatch, users, questions, loading }) {
+function App({ dispatch, authedUser }) {
   useEffect(() => {
     M.AutoInit();
   }, []);
@@ -24,28 +26,32 @@ function App({ dispatch, users, questions, loading }) {
   useEffect(() => {
     dispatch(handleInitialData());
   }, [dispatch]);
-
-  // console.log(users)
+  console.log(authedUser);
 
   return (
     <div className="App">
       <Nav />
       <LoadingBar />
+
       <Routes>
         <Route exact path="/login" element={<LoginPage />} />
         <Route exact path="/logout" element={<Logout />} />
-        <Route exact path="/add" element={<NewPoll />} />
-        <Route exact path="/leaderdashboard" element={<LeaderDashboard />} />
-        <Route exact path="/" element={<Questions />} />
-        <Route exact path="/:id" element={<QuestionPreview />} />
+        <Route element={<ProtedtedRoutes />}>
+          <Route exact path="/add" element={<NewPoll />} />
+          <Route exact path="/leaderdashboard" element={<LeaderDashboard />} />
+          <Route exact path="/" element={<Questions />} />
+          <Route exact path="questions/:id" element={<QuestionPreview />} />
+          <Route exact path="*" element={<BadRequest />} />
+        </Route>
       </Routes>
+
       <Footer />
     </div>
   );
 }
 
 const mapStateToProps = ({ users, questions, LoadingBar, authedUser }) => {
-  let loading = !LoadingBar;
+  let loading = LoadingBar;
   return { users, questions, loading, authedUser };
 };
 
