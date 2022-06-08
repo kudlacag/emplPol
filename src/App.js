@@ -17,8 +17,9 @@ import Questions from "./components/Questions";
 import Logout from "./components/Logout";
 import ProtedtedRoutes from "./protectedRoute/ProtedtedRoutes";
 import BadRequest from "./components/BadRequest";
+// import { logoutAuthedUser } from "./actions/authedUser";
 
-function App({ dispatch, authedUser }) {
+function App({ dispatch, authedUser, users }) {
   useEffect(() => {
     M.AutoInit();
   }, []);
@@ -26,7 +27,7 @@ function App({ dispatch, authedUser }) {
   useEffect(() => {
     dispatch(handleInitialData());
   }, [dispatch]);
-  console.log(authedUser);
+  // console.log(authedUser);
 
   return (
     <div className="App">
@@ -35,14 +36,22 @@ function App({ dispatch, authedUser }) {
 
       <Routes>
         <Route exact path="/login" element={<LoginPage />} />
-        <Route exact path="/logout" element={<Logout />} />
-        <Route element={<ProtedtedRoutes />}>
-          <Route exact path="/add" element={<NewPoll />} />
-          <Route exact path="/leaderdashboard" element={<LeaderDashboard />} />
-          <Route exact path="/" element={<Questions />} />
-          <Route exact path="questions/:id" element={<QuestionPreview />} />
-          <Route exact path="*" element={<BadRequest />} />
-        </Route>
+        {authedUser && (
+          <>
+            <Route exact path="/logout" element={<Logout />} />
+            <Route element={<ProtedtedRoutes />}>
+              <Route exact path="/add" element={<NewPoll />} />
+              <Route
+                exact
+                path="/leaderdashboard"
+                element={<LeaderDashboard />}
+              />
+              <Route exact path="/" element={<Questions />} />
+              <Route exact path="questions/:id" element={<QuestionPreview />} />
+            </Route>
+          </>
+        )}
+        <Route exact path="*" element={<BadRequest />} />
       </Routes>
 
       <Footer />

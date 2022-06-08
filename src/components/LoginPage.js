@@ -9,6 +9,7 @@ function LoginPage({ users, dispatch }) {
 
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleChanangeUser = (e) => {
     setUser(e.target.value);
@@ -18,16 +19,28 @@ function LoginPage({ users, dispatch }) {
   };
   const formSubmit = (e) => {
     e.preventDefault();
-    if (users[user].id === user && users[user].password === password) {
-      dispatch(setAuthedUser(user));
-      // console.log(users[user].id === user && users[user].password === password);
-      navigate("/");
+    if (!user || !password) {
+      setError(true);
     } else {
-      console.log("password or user false");
+      if (users[user].id === user && users[user].password === password) {
+        dispatch(setAuthedUser(user));
+        navigate("/");
+      } else {
+        setError(true);
+      }
     }
   };
   return (
     <div>
+      {error && (
+        <h5
+          data-testid="error-header"
+          style={{ backgroundColor: "red", padding: "10px" }}
+        >
+          Error: Please ensure all fields are filled out and everything are
+          right.
+        </h5>
+      )}
       <form onSubmit={formSubmit}>
         <h1>Employee Poll</h1>
         <img src={userPageImage} width="350px" height="auto" alt="userpage" />
@@ -40,7 +53,7 @@ function LoginPage({ users, dispatch }) {
           name="user"
           value={user}
           onChange={handleChanangeUser}
-          className="input-field"
+          className="input-field center"
           data-testid="user-input"
         />
         <br />
@@ -53,15 +66,17 @@ function LoginPage({ users, dispatch }) {
           name="password"
           value={password}
           onChange={handleChanangePassword}
-          className="input-field"
+          className="input-field center"
           data-testid="password-input"
         />
         <br />
-
+        <p>{error}</p>
+        <br />
         <button
           className="btn waves-effect waves-light"
           type="submit"
           value="Submit"
+          disabled={!user}
         >
           Submit
           <i className="material-icons right">send</i>

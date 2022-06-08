@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-// import userOne from '../images/user1.jpg';
+// import userOne from '../images/user1.jpg'
 import { handleAddanswer } from "../actions/saveAnswer";
 
 function QuestionPreview({ dispatch }) {
