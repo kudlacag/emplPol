@@ -3,15 +3,17 @@ import { connect } from "react-redux";
 import { logoutAuthedUser } from "../actions/authedUser";
 import { Link } from "react-router-dom";
 import userAvatar from "../images/useravatar.png";
+import { useNavigate } from "react-router-dom";
 
 function Nav(props) {
-  const { authedUser, avatar, userName, dispatch, users } = props;
-  // console.log(authedUser);
+  const { authedUser, avatar, userName, dispatch } = props;
+
+  const navigate = useNavigate();
 
   const logout = (e) => {
     e.preventDefault();
     dispatch(logoutAuthedUser());
-    // console.log("logedout");
+    navigate("/login");
   };
 
   return (
@@ -21,7 +23,7 @@ function Nav(props) {
           Employee Poll
         </Link>
         <ul className="left">
-          {authedUser && (
+          {typeof authedUser !== "object" && (
             <>
               <li>
                 <Link to="/">Home</Link>
@@ -36,7 +38,7 @@ function Nav(props) {
           )}
         </ul>
         <ul className="right">
-          {authedUser ? (
+          {typeof authedUser !== "object" ? (
             <>
               <li>
                 <Link to="/">
@@ -51,12 +53,7 @@ function Nav(props) {
                   />
                 </Link>
               </li>
-              <li>{userName}</li>{" "}
-              {/* <li>
-                <Link to="/login">Login</Link>
-                {" "}
-              </li> */}
-              <li className="divider"></li>
+              <li>{userName}</li> <li className="divider"></li>
               <li>
                 <Link onClick={logout} to="/logout">
                   Logout
@@ -83,9 +80,6 @@ function Nav(props) {
                 <Link to="/login">Login</Link>
               </li>
               <li className="divider"></li>
-              {/* <li>
-                <Link to="/logout">Logout</Link>
-              </li>{" "} */}
             </>
           )}
         </ul>

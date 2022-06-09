@@ -1,11 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { logoutAuthedUser } from "../actions/authedUser";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Logout({ dispatch }) {
+  const navigate = useNavigate();
   const logout = () => {
     dispatch(logoutAuthedUser());
+    navigate("/login");
   };
   return (
     <div>

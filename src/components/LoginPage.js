@@ -10,6 +10,7 @@ function LoginPage({ users, dispatch }) {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleChanangeUser = (e) => {
     setUser(e.target.value);
@@ -19,10 +20,16 @@ function LoginPage({ users, dispatch }) {
   };
   const formSubmit = (e) => {
     e.preventDefault();
-    if (!user || !password) {
+    if (
+      !user &&
+      !password &&
+      !users[user]?.id === user &&
+      !users[user]?.password === password
+    ) {
       setError(true);
     } else {
-      if (users[user].id === user && users[user].password === password) {
+      if (users[user]?.id === user && users[user]?.password === password) {
+        setSuccess(true);
         dispatch(setAuthedUser(user));
         navigate("/");
       } else {
@@ -30,15 +37,22 @@ function LoginPage({ users, dispatch }) {
       }
     }
   };
+
+  const input1 = document.getElementById("input-1");
+  const input2 = document.getElementById("input-2");
+  if (error) {
+    input1.style.border = "3px solid red";
+    input2.style.border = "3px solid red";
+  }
+
   return (
     <div>
-      {error && (
+      {success && (
         <h5
-          data-testid="error-header"
-          style={{ backgroundColor: "red", padding: "10px" }}
+          data-testid="success-header"
+          style={{ backgroundColor: "green", color: "white" }}
         >
-          Error: Please ensure all fields are filled out and everything are
-          right.
+          logged in
         </h5>
       )}
       <form onSubmit={formSubmit}>
@@ -55,6 +69,7 @@ function LoginPage({ users, dispatch }) {
           onChange={handleChanangeUser}
           className="input-field center"
           data-testid="user-input"
+          id="input-1"
         />
         <br />
 
@@ -68,6 +83,7 @@ function LoginPage({ users, dispatch }) {
           onChange={handleChanangePassword}
           className="input-field center"
           data-testid="password-input"
+          id="input-2"
         />
         <br />
         <p>{error}</p>

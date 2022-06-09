@@ -45,6 +45,6 @@ describe("LoginPage", () => {
     fireEvent.change(passwordInput, { target: { value: "password123" } });
     var submitButton = component.getByText("Submit");
     fireEvent.click(submitButton);
-    expect(component.queryByTestId("error-header")).not.toBeInTheDocument();
+    expect(component.queryByTestId("success-header")).not.toBeInTheDocument();
   });
 });

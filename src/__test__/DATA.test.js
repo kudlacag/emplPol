@@ -4,7 +4,6 @@ import {
   _saveQuestionAnswer,
   _getQuestions,
 } from "../data/_DATA";
-import questions from "../reducers/questions";
 
 describe("_saveQuestionAnswer", () => {
   it("will return true if it works", async () => {
@@ -73,5 +72,17 @@ describe("_getQuestions", () => {
     expect(questions[questionOne].optionTwo.text).toEqual(
       "Build our new application with Typescript"
     );
+  });
+
+  it("rejects while the user do not pass author", async () => {
+    const newQuestion = _saveQuestion({
+      optionOneText: "Frontend",
+      optionTwoText: "Backend",
+    });
+
+    await expect(newQuestion).rejects.toEqual(
+      "Please provide optionOneText, optionTwoText, and author"
+    );
+    expect(newQuestion).toBeInstanceOf(Promise);
   });
 });

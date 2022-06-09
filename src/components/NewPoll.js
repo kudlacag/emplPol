@@ -4,7 +4,7 @@ import { handleAddQuestion } from "../actions/saveQuestion";
 // import Questions from './Questions';
 import { useNavigate } from "react-router-dom";
 
-function NewPoll({ authedUser, dispatch, users, userIds }) {
+function NewPoll({ authedUser, dispatch }) {
   const navigate = useNavigate();
 
   const [optionOne, setOptionOne] = useState("");
@@ -18,7 +18,7 @@ function NewPoll({ authedUser, dispatch, users, userIds }) {
     );
   }
   let id = generateUID();
-  console.log(authedUser !== null);
+
   const handleFirstOption = (e) => {
     const text = e.target.value;
     setOptionOne(text);
@@ -30,46 +30,67 @@ function NewPoll({ authedUser, dispatch, users, userIds }) {
 
   const handleOnsubmit = (e) => {
     e.preventDefault();
-    dispatch(handleAddQuestion(id, authedUser, optionOne, optionTwo));
+    if (!authedUser || !optionOne || !optionTwo) {
+      setError(true);
+    } else {
+      dispatch(handleAddQuestion(id, authedUser, optionOne, optionTwo));
 
-    setOptionOne("");
-    setOptionTwo("");
+      setOptionOne("");
+      setOptionTwo("");
 
-    navigate("/");
+      navigate("/");
+    }
   };
+
+  const input1 = document.getElementById("input-1");
+  const input2 = document.getElementById("input-2");
+  if (error) {
+    input1.style.border = "3px solid red";
+    input2.style.border = "3px solid red";
+  }
 
   return (
     <form onSubmit={handleOnsubmit} style={{ marginBottom: "10px" }}>
-      {authedUser !== null && (
+      {typeof authedUser !== "object" ? (
         <>
           <h3>Would You Rather</h3>
-          <p>Create Your Own Poll</p>
-          <h6>First Option</h6>
+          <h5>Create Your Own Poll</h5>
+          <h5>First Option</h5>
           <input
             type="text"
             name="foption"
             value={optionOne}
             onChange={handleFirstOption}
             data-testid="foption"
+            id="input-1"
           />
-          <h6>First Option</h6>
+          <h5>First Option</h5>
           <input
             type="text"
             name="soption"
             value={optionTwo}
             onChange={handleSecondOption}
             data-testid="soption"
+            id="input-2"
           />
           <button
             className="btn waves-effect waves-light"
             type="submit"
             value="Submit"
-            disabled={error}
           >
             Submit
             <i className="material-icons right">send</i>
           </button>{" "}
         </>
+      ) : (
+        <h3
+          style={{
+            padding: "100px",
+            color: "red",
+          }}
+        >
+          Please log in again
+        </h3>
       )}
     </form>
   );

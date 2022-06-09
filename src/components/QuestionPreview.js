@@ -32,7 +32,7 @@ function QuestionPreview({ dispatch }) {
     return questions[newId].author === fot;
   });
 
-  const answered = Object.keys(users[authedUser].answers).includes(id);
+  const answered = Object.keys(users[authedUser]?.answers).includes(id);
 
   if (authedUser && id && answer) {
     dispatch(handleAddanswer(authedUser, id, answer));
