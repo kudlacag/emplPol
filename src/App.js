@@ -36,16 +36,12 @@ function App({ dispatch, authedUser, users }) {
 
       <Routes>
         <Route exact path="/login" element={<LoginPage />} />
-        {authedUser && (
+        {typeof authedUser !== "object" && (
           <>
             <Route exact path="/logout" element={<Logout />} />
             <Route element={<ProtedtedRoutes />}>
               <Route exact path="/add" element={<NewPoll />} />
-              <Route
-                exact
-                path="/leaderdashboard"
-                element={<LeaderDashboard />}
-              />
+              <Route exact path="leaderboard" element={<LeaderDashboard />} />
               <Route exact path="/" element={<Questions />} />
               <Route exact path="questions/:id" element={<QuestionPreview />} />
             </Route>

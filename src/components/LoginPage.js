@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import userPageImage from "../images/login.jpg";
 import { setAuthedUser } from "../actions/authedUser";
 
-function LoginPage({ users, dispatch }) {
+function LoginPage({ users, userIds, dispatch }) {
   const navigate = useNavigate();
 
   const [user, setUser] = useState("");
@@ -12,10 +12,10 @@ function LoginPage({ users, dispatch }) {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const handleChanangeUser = (e) => {
+  const handleChangeUser = (e) => {
     setUser(e.target.value);
   };
-  const handleChanangePassword = (e) => {
+  const handleChangePassword = (e) => {
     setPassword(e.target.value);
   };
   const formSubmit = (e) => {
@@ -60,7 +60,7 @@ function LoginPage({ users, dispatch }) {
         <img src={userPageImage} width="350px" height="auto" alt="userpage" />
         <h3>Log In</h3>
 
-        <label htmlFor="user">User</label>
+        {/* <label htmlFor="user">User</label>
         <br />
         <input
           type="text"
@@ -74,9 +74,49 @@ function LoginPage({ users, dispatch }) {
         <br />
 
         <label htmlFor="password">Password</label>
+        <br /> */}
+
+        <div className="input-field col s12">
+          <h6>Choose a User</h6>
+          <select
+            className="browser-default"
+            id="input-1"
+            onChange={handleChangeUser}
+          >
+            {userIds?.map((user) => (
+              <option
+                key={users[user].id}
+                value={users[user].id}
+                style={{ textAlign: "center", fontSize: "25px" }}
+              >
+                {users[user].id}
+              </option>
+            ))}
+          </select>
+        </div>
         <br />
 
-        <input
+        <div className="input-field col s12" name="password">
+          <h6>Choose a Password</h6>
+          <select
+            className="browser-default"
+            id="input-2"
+            onChange={handleChangePassword}
+          >
+            {Object.keys(users).map((user) => (
+              <option
+                key={users[user].id}
+                value={users[user].password}
+                style={{ textAlign: "center", fontSize: "25px" }}
+              >
+                Password for {users[user].id} is {users[user].password}
+              </option>
+            ))}
+          </select>
+        </div>
+        <br />
+
+        {/* <input
           type="password"
           name="password"
           value={password}
@@ -84,7 +124,7 @@ function LoginPage({ users, dispatch }) {
           className="input-field center"
           data-testid="password-input"
           id="input-2"
-        />
+        /> */}
         <br />
         <p>{error}</p>
         <br />

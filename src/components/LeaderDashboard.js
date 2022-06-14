@@ -1,7 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 
-function LeaderDashboard({ users, userIds, authedUser }) {
+function LeaderDashboard({
+  users,
+  userIds,
+  authedUser,
+  questionIds,
+  questions,
+}) {
   return (
     <div>
       {typeof authedUser !== "object" ? (
@@ -43,8 +49,14 @@ function LeaderDashboard({ users, userIds, authedUser }) {
                       </div>
                     </td>
                     <td>{Object.keys(users[user].answers).length}</td>
-
-                    <td>{users[user].questions.length}</td>
+                    {console.log()}
+                    <td>
+                      {
+                        questionIds.filter(
+                          (qu) => questions[qu].author === users[user].id
+                        ).length
+                      }
+                    </td>
                   </tr>
                 );
               })}
@@ -68,16 +80,20 @@ function LeaderDashboard({ users, userIds, authedUser }) {
 function mapStateToProps(state) {
   const users = state.users;
   const authedUser = state.authedUser;
+  const questions = state.questions;
   const userIds = Object.keys(users).sort(
     (a, b) =>
       Object.keys(users[b].answers).length -
       Object.keys(users[a].answers).length
   );
+  const questionIds = Object.keys(questions);
 
   return {
     users,
     userIds,
     authedUser,
+    questionIds,
+    questions,
   };
 }
 export default connect(mapStateToProps)(LeaderDashboard);

@@ -29,7 +29,7 @@ function Nav(props) {
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/leaderdashboard">Leaderdashboard</Link>
+                <Link to="leaderboard">Leaderdashboard</Link>
               </li>
               <li>
                 <Link to="/add">New</Link>
