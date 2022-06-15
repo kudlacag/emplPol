@@ -49,7 +49,8 @@ function LeaderDashboard({
                       </div>
                     </td>
                     <td>{Object.keys(users[user].answers).length}</td>
-                    {console.log()}
+                    {/* {console.log(questionIds)} */}
+
                     <td>
                       {
                         questionIds.filter(
@@ -81,12 +82,14 @@ function mapStateToProps(state) {
   const users = state.users;
   const authedUser = state.authedUser;
   const questions = state.questions;
+  const questionIds = Object.keys(questions);
   const userIds = Object.keys(users).sort(
     (a, b) =>
       Object.keys(users[b].answers).length -
-      Object.keys(users[a].answers).length
+      Object.keys(users[a].answers).length +
+      questionIds.filter((qu) => questions[qu].author === users[b].id).length -
+      questionIds.filter((qu) => questions[qu].author === users[a].id).length
   );
-  const questionIds = Object.keys(questions);
 
   return {
     users,

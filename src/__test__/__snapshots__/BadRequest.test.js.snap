@@ -8,24 +8,18 @@ Object {
       <div
         style="text-align: center; font-size: 25px; padding: 50px;"
       >
-        <p>
+        <p
+          data-testid="Text"
+        >
           There is nothing to show here or the page is loading
         </p>
-        <a
-          href="/login"
-        >
-          <button
-            class="btn waves-effect waves-light"
-            data-testid="Login"
-          >
-            Login
-            <i
-              class="material-icons right"
-            >
-              send
-            </i>
-          </button>
-        </a>
+        <img
+          alt="userpage"
+          data-testid="Image"
+          height="auto"
+          src="404.jpg"
+          width="550px"
+        />
       </div>
     </div>
   </body>,
@@ -33,24 +27,18 @@ Object {
     <div
       style="text-align: center; font-size: 25px; padding: 50px;"
     >
-      <p>
+      <p
+        data-testid="Text"
+      >
         There is nothing to show here or the page is loading
       </p>
-      <a
-        href="/login"
-      >
-        <button
-          class="btn waves-effect waves-light"
-          data-testid="Login"
-        >
-          Login
-          <i
-            class="material-icons right"
-          >
-            send
-          </i>
-        </button>
-      </a>
+      <img
+        alt="userpage"
+        data-testid="Image"
+        height="auto"
+        src="404.jpg"
+        width="550px"
+      />
     </div>
   </div>,
   "debug": [Function],

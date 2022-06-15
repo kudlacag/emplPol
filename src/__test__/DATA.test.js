@@ -5,18 +5,6 @@ import {
   _getQuestions,
 } from "../data/_DATA";
 
-describe("_saveQuestionAnswer", () => {
-  it("will return true if it works", async () => {
-    const trueAnswer = _saveQuestionAnswer({
-      authedUser: "mtsamis",
-      qid: "6ni6ok3ym7mf1p33lnez",
-      answer: "optionTwo",
-    });
-
-    await expect(trueAnswer).resolves.toEqual(true);
-  });
-});
-
 describe("_getUsers", () => {
   it("will return an Object", async () => {
     const { ...users } = await _getUsers();
@@ -84,5 +72,28 @@ describe("_getQuestions", () => {
       "Please provide optionOneText, optionTwoText, and author"
     );
     expect(newQuestion).toBeInstanceOf(Promise);
+  });
+});
+
+describe("_saveQuestionAnswer", () => {
+  it("will return true if it works", async () => {
+    const trueAnswer = _saveQuestionAnswer({
+      authedUser: "mtsamis",
+      qid: "6ni6ok3ym7mf1p33lnez",
+      answer: "optionTwo",
+    });
+
+    await expect(trueAnswer).resolves.toEqual(true);
+  });
+
+  it("will throw error ", async () => {
+    const falseAnswer = _saveQuestionAnswer({
+      authedUser: "mtsamis",
+      answer: "optionTwo",
+    });
+
+    await expect(falseAnswer).rejects.toEqual(
+      "Please provide authedUser, qid, and answer"
+    );
   });
 });

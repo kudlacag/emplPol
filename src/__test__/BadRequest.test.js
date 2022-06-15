@@ -9,15 +9,14 @@ describe("BadRequest", () => {
         <BadRequest />
       </MemoryRouter>
     );
-    let Login = component.getByTestId("Login");
-    let Text = component.getByText(
-      "There is nothing to show here or the page is loading"
-    );
+    // let Login = component.getByTestId("Text");
+    let Text = component.getByTestId("Text");
+    let Image = component.getByTestId("Image");
 
-    fireEvent.click(Login);
-    expect(Login).toBeInTheDocument();
+    fireEvent.click(Image);
+    expect(Image).toBeInTheDocument();
     expect(Text).toBeInTheDocument();
-    expect(Login).toBeInTheDocument();
+    expect(Image).toBeInTheDocument();
   });
 });
 

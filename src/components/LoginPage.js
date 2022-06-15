@@ -31,7 +31,7 @@ function LoginPage({ users, userIds, dispatch }) {
       if (users[user]?.id === user && users[user]?.password === password) {
         setSuccess(true);
         dispatch(setAuthedUser(user));
-        navigate("/");
+        // navigate("/");
       } else {
         setError(true);
       }
@@ -60,27 +60,12 @@ function LoginPage({ users, userIds, dispatch }) {
         <img src={userPageImage} width="350px" height="auto" alt="userpage" />
         <h3>Log In</h3>
 
-        {/* <label htmlFor="user">User</label>
-        <br />
-        <input
-          type="text"
-          name="user"
-          value={user}
-          onChange={handleChanangeUser}
-          className="input-field center"
-          data-testid="user-input"
-          id="input-1"
-        />
-        <br />
-
-        <label htmlFor="password">Password</label>
-        <br /> */}
-
         <div className="input-field col s12">
           <h6>Choose a User</h6>
           <select
             className="browser-default"
             id="input-1"
+            data-testid="user-input"
             onChange={handleChangeUser}
           >
             {userIds?.map((user) => (
@@ -101,6 +86,7 @@ function LoginPage({ users, userIds, dispatch }) {
           <select
             className="browser-default"
             id="input-2"
+            data-testid="password-input"
             onChange={handleChangePassword}
           >
             {Object.keys(users).map((user) => (
@@ -115,16 +101,6 @@ function LoginPage({ users, userIds, dispatch }) {
           </select>
         </div>
         <br />
-
-        {/* <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handleChanangePassword}
-          className="input-field center"
-          data-testid="password-input"
-          id="input-2"
-        /> */}
         <br />
         <p>{error}</p>
         <br />

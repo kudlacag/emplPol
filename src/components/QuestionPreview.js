@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 // import userOne from '../images/user1.jpg'
 import { handleAddanswer } from "../actions/saveAnswer";
+import BadRequest from "./BadRequest";
 
 function QuestionPreview({
   dispatch,
@@ -17,9 +18,7 @@ function QuestionPreview({
 
   // const { questions, users, questionIds, userIds, authedUser } = state;
   let { id } = useParams();
-  const newId = questionIds?.filter((qId) => {
-    return qId === id;
-  });
+
   const [answer, setAnswer] = useState();
 
   const options = (e) => {
@@ -30,23 +29,35 @@ function QuestionPreview({
     }, 300);
   };
 
-  const photo = userIds?.filter((user) => {
-    return users[user];
-  });
+  const pageFound = questionIds.includes(id);
 
-  const newPhoto = photo.filter((fot) => {
-    return questions[newId].author === fot;
-  });
+  let newId, photo, newPhoto;
+  if (pageFound) {
+    newId = questionIds?.filter((qId) => qId === id);
+  }
+
+  // console.log(questionIds.includes(id));
+
+  if (pageFound) {
+    photo = userIds?.filter((user) => users[user]);
+  }
+
+  if (pageFound) {
+    newPhoto = photo.filter((fot) => questions[newId].author === fot);
+  }
+
+  // console.log(newPhoto);
 
   const answered = Object.keys(users[authedUser]?.answers).includes(id);
 
-  if (authedUser && id && answer) {
-    dispatch(handleAddanswer(authedUser, id, answer));
+  if (pageFound) {
+    if (authedUser && id && answer) {
+      dispatch(handleAddanswer(authedUser, id, answer));
+    }
   }
-
   return (
     <>
-      {typeof authedUser !== "object" && (
+      {pageFound ? (
         <div key={questions[newId].id}>
           <h3>Poll by {questions[newId].author}</h3>
 
@@ -181,6 +192,8 @@ function QuestionPreview({
             )}
           </div>
         </div>
+      ) : (
+        <BadRequest />
       )}
     </>
   );

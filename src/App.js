@@ -35,19 +35,39 @@ function App({ dispatch, authedUser, users }) {
       <LoadingBar />
 
       <Routes>
-        <Route exact path="/login" element={<LoginPage />} />
-        {typeof authedUser !== "object" && (
+        {/* <Route exact path="/login" element={<LoginPage />} /> */}
+        {typeof authedUser !== "object" ? (
           <>
             <Route exact path="/logout" element={<Logout />} />
             <Route element={<ProtedtedRoutes />}>
-              <Route exact path="/add" element={<NewPoll />} />
-              <Route exact path="leaderboard" element={<LeaderDashboard />} />
-              <Route exact path="/" element={<Questions />} />
-              <Route exact path="questions/:id" element={<QuestionPreview />} />
+              <Route>
+                <Route path="/add" element={<NewPoll />} />
+                <Route path="*" element={<BadRequest />} />
+              </Route>
+
+              <Route>
+                <Route
+                  exact
+                  path="/leaderboard"
+                  element={<LeaderDashboard />}
+                />
+                <Route path="*" element={<BadRequest />} />
+              </Route>
+              <Route>
+                <Route exact path="/" element={<Questions />} />
+                <Route path="*" element={<BadRequest />} />
+              </Route>
+
+              <Route>
+                <Route path="/questions/:id" element={<QuestionPreview />} />
+                <Route path="/badrequest" element={<BadRequest />} />
+              </Route>
+              {/* <Route exact path="questions/:id" element={<QuestionPreview />} /> */}
             </Route>
           </>
+        ) : (
+          <Route path="*" element={<LoginPage />} />
         )}
-        <Route exact path="*" element={<BadRequest />} />
       </Routes>
 
       <Footer />

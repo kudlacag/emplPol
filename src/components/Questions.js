@@ -85,6 +85,7 @@ function Questions({ userIds, authedUser, questionIds, questions, users }) {
                               users,
                               questions,
                               authedUser,
+                              id,
                             },
                           });
                         }}
